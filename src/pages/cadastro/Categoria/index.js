@@ -28,7 +28,9 @@ function CadastroCategoria() {
     }
 
     useEffect(() => {
-        const URL = 'https://tibiaflix.herokuapp.com/categorias';
+        const URL = window.location.hostname.includes('localhost') ?
+        'http://localhost:8080/categorias' :
+        'https://tibiaflix.herokuapp.com/categorias';
         fetch(URL)
             .then(async (respostaDoServidor) => {
                 const resposta = await respostaDoServidor.json();
