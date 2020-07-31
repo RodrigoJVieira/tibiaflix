@@ -28,16 +28,17 @@ function CadastroCategoria() {
     }
 
     useEffect(() => {
-        const URL_TOP = 'http://localhost:8080/categorias';
-        fetch(URL_TOP)
-            .then(async (respostaDoServidor) => {
-                const resposta = await respostaDoServidor.json();
-                setCategorias([
-                    ...resposta,
-                ]);
-            });
-        });
-        
+        if(window.location.href.includes('localhost')) {
+            const URL = 'http://localhost:8080/categorias';
+            fetch(URL)
+                .then(async (respostaDoServidor) => {
+                    const resposta = await respostaDoServidor.json();
+                    setCategorias(resposta);
+                    return;
+                })
+        }
+    }, []); 
+            
     return (
         <PageDefault>
             <h1>Cadastro de Categoria: {values.nome}</h1>
@@ -75,7 +76,7 @@ function CadastroCategoria() {
                         name="cor"
                         onChange={handleCategoria}
                     />
-                    <Button>
+                    <Button to="/">
                         Cadastrar
                     </Button>
                 </form>
@@ -97,8 +98,8 @@ function CadastroCategoria() {
             </ul>
             
 
-            <Link to= "/">
-                Cadastrar Categoria 
+            <Link to="/">
+                Ir para home 
             </Link>
         </PageDefault>
     );

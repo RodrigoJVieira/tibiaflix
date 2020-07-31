@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 const FormFieldWrapper = styled.div`
@@ -93,5 +94,18 @@ function FormField({
     </FormFieldWrapper>
   );
 }
+
+FormField.defaultProps = {
+  type: 'text',
+  value: '',
+};
+
+FormField.propTypes = {
+  label: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  type: PropTypes.string,
+  value: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+};
 
 export default FormField;
