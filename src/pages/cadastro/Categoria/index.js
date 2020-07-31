@@ -28,14 +28,12 @@ function CadastroCategoria() {
     }
 
     useEffect(() => {
-        if(window.location.href.includes('localhost')) {
-            const URL = 'http://localhost:8080/categorias';
-            fetch(URL)
-                .then(async (respostaDoServidor) => {
-                    const resposta = await respostaDoServidor.json();
-                    setCategorias([...resposta]);
-                });
-        }
+        const URL = 'http://localhost:8080/categorias';
+        fetch(URL)
+            .then(async (respostaDoServidor) => {
+                const resposta = await respostaDoServidor.json();
+                setCategorias([...resposta]);
+        });
     }, []); 
             
     return (
@@ -82,7 +80,7 @@ function CadastroCategoria() {
 
                 {categorias.length === 0 && (
                     <div>
-                        Carregando...
+                        Loadingando...
                     </div>
                 )}
 
