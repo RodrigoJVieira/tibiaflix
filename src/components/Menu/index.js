@@ -10,7 +10,7 @@ function Menu() {
             <Link to="/">
                 <img className="Logo" src={Logo} alt="Tibiaflix"/>
             </Link>
-            <Button className="ButtonLink" to="/cadastro/video">
+            <Button as={Link} className="ButtonLink" to="/cadastro/video">
                 Novo vídeo
             </Button>
         </nav>

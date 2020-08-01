@@ -3,6 +3,7 @@ import PageDefault from '../../../components/PageDefault';
 import { Link } from 'react-router-dom';
 import FormField from '../../../components/FormField';
 import Button from '../../../components/Button';
+import useForm from '../../../hooks/useForm';
 
 function CadastroCategoria() {
     const valoresIniciais = {
@@ -10,23 +11,11 @@ function CadastroCategoria() {
         descricao: '',
         cor: '',
     }
+
+    const { values, handleCategoria, clearForm } = useForm(valoresIniciais);
+
     const [categorias, setCategorias] = useState([]);
-    const [values, setValues] = useState(valoresIniciais);
    
-    function setValue(chave, valor) {
-        setValues ({
-            ...values,
-            [chave]: valor,
-        })
-    }
-
-    function handleCategoria(params) {
-        setValue(
-            params.target.getAttribute('name'), 
-            params.target.value,
-        ); 
-    }
-
     useEffect(() => {
         const URL = window.location.hostname.includes('localhost') ?
         'http://localhost:8080/categorias' :
@@ -48,7 +37,7 @@ function CadastroCategoria() {
                         values
                     ]);
 
-                    setValues(valoresIniciais);
+                    clearForm(valoresIniciais);
 
                 }}>
                     
@@ -75,7 +64,7 @@ function CadastroCategoria() {
                         name="cor"
                         onChange={handleCategoria}
                     />
-                    <Button to="/">
+                    <Button>
                         Cadastrar
                     </Button>
                 </form>
@@ -89,8 +78,8 @@ function CadastroCategoria() {
             <ul>
                 {categorias.map((categoria, indice) => {
                     return (
-                        <li key={`${categoria}${indice}`}>
-                            {categoria.nome}
+                        <li key={`${categoria.titulo}${indice}`}>
+                            {categoria.titulo}
                         </li>
                     );
                 })}
